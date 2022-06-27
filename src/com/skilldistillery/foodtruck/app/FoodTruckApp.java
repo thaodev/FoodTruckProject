@@ -16,19 +16,55 @@ public class FoodTruckApp {
 
 	private static void userInput() {
 		int count = 0;
+		boolean isString = true;
+		boolean isNumber = true;
 		System.out.println("FOOD TRUCK PARADISE REGISTER");
 		while (count < fleetOfFoodTrucks.length) {
 
 			System.out.println("Enter the food truck name: ");
-			String name = sc.nextLine();
+			String name = sc.nextLine().trim();
 			if (name.toLowerCase().equals("quit")) {
 				System.out.println("Successfully stop adding more food truck");
 				break;
 			}
+
+			while (isNumber)
+				try {
+					int nameInt = Integer.parseInt(name);
+					System.out.println("Input must be a String");
+					name = sc.nextLine();
+					isNumber = true;
+				} catch (NumberFormatException e) {
+					isNumber = false;
+				}
+
 			System.out.println("Enter the food truck food type: ");
-			String foodType = sc.nextLine();
+			String foodType = sc.nextLine().trim();
+			isNumber = true;
+			while (isNumber)
+				try {
+					int foodTypeInt = Integer.parseInt(foodType);
+					System.out.println("Input must be a String");
+					foodType = sc.nextLine();
+					isNumber = true;
+				} catch (NumberFormatException e) {
+					isNumber = false;
+				}
+			
 			System.out.println("Enter the rating: ");
-			double rating = sc.nextDouble();
+			String ratingS = sc.nextLine();
+			Double rating = 0.0;
+			isString = true;
+			while (isString) 
+				try {
+					rating = Double.parseDouble(ratingS);
+					isString = false;
+				} catch (NumberFormatException e) {
+					System.out.println("Input must be a Number");
+					ratingS = sc.nextLine();
+				}
+			
+			
 			FoodTruck foodTruck = new FoodTruck(name, foodType, rating);
 			fleetOfFoodTrucks[count] = foodTruck;
 			count++;
@@ -36,10 +72,11 @@ public class FoodTruckApp {
 				System.out.println("That was the last truck you can add to the program!");
 				break;
 			}
-			sc.nextLine();
+			//sc.nextLine();
 
 		}
 	}
+
 	private static void userMenu() {
 		boolean isContinued = true;
 		while (isContinued) {
@@ -69,6 +106,7 @@ public class FoodTruckApp {
 			}
 		}
 	}
+
 	private static void displayFoodTruck(FoodTruck[] foodTruckGeneric) {
 		for (FoodTruck foodTruck : foodTruckGeneric) {
 			if (foodTruck != null) {
