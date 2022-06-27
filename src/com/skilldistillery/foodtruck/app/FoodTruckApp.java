@@ -93,12 +93,12 @@ public class FoodTruckApp {
 	private static void highestRatedFoodTruck(FoodTruck[] foodTruckGeneric) {
 		double max = 0;
 		for (FoodTruck foodTruck : foodTruckGeneric) {
-			if (foodTruck.getRating() > max) {
+			if (foodTruck != null && foodTruck.getRating() > max) {
 				max = foodTruck.getRating();
 			}
 		}
 		for (FoodTruck foodTruck : foodTruckGeneric) {
-			if (foodTruck.getRating() == max) {
+			if (foodTruck != null && foodTruck.getRating() == max) {
 				System.out.println(foodTruck.toString());
 			}
 		}
